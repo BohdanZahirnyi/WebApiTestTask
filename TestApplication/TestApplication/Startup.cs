@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using TestApplication.Data.Models;
 
 namespace TestApplication
 {
@@ -25,7 +26,11 @@ namespace TestApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+                        string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=HeroDB;Integrated Security=True;";
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddTransient<IHeroRepository, HeroRepository>(provider => new HeroRepository(connectionString));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -11837,11 +11837,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Bodya Zahirnuy\\source\\repos\\TestApplication\\TestApplication\\TestApplication.csproj",
+      "projectUniqueName": "E:\\repo\\WebApiTestTask\\TestApplication\\TestApplication\\TestApplication.csproj",
       "projectName": "TestApplication",
-      "projectPath": "C:\\Users\\Bodya Zahirnuy\\source\\repos\\TestApplication\\TestApplication\\TestApplication.csproj",
+      "projectPath": "E:\\repo\\WebApiTestTask\\TestApplication\\TestApplication\\TestApplication.csproj",
       "packagesPath": "C:\\Users\\Bodya Zahirnuy\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Bodya Zahirnuy\\source\\repos\\TestApplication\\TestApplication\\obj\\",
+      "outputPath": "E:\\repo\\WebApiTestTask\\TestApplication\\TestApplication\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
