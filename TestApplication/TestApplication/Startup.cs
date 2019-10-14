@@ -31,6 +31,18 @@ namespace TestApplication
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddTransient<IHeroRepository, HeroRepository>(provider => new HeroRepository(connectionString));
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllHeaders",
+                      builder =>
+                      {
+                          builder.AllowAnyHeader()
+                                 .AllowAnyOrigin()
+                                 .AllowAnyMethod();
+
+                      });
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +59,8 @@ namespace TestApplication
 
             app.UseHttpsRedirection();
             app.UseMvc();
+            app.UseCors("AllowAllHeaders");
+
         }
     }
 }

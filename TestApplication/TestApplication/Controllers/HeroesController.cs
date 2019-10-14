@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using TestApplication.Data.Models;
 using TestApplication.Models;
 
 namespace TestApplication.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/")]
     [ApiController]
+    [EnableCors("AllowAllHeaders")]
     public class HeroesController : Controller
     {
         IHeroRepository repo;
@@ -18,25 +20,28 @@ namespace TestApplication.Controllers
           
             repo = r;
         }
-        // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<Hero>> Get()
+      
+
+        // GET api/heroes/get/{id?}
+        [HttpGet("{id}")]
+        [Route("get/{id?}/")]
+        public ActionResult<IEnumerable<Hero>> Get(int id)
         {
-           
+            List<Hero> l = new List<Hero>();
+
+            Hero hero =  repo.Get(id);
+            if (hero != null)
+            {
+                l.Add(hero);
+                return l;
+            }
             return repo.GetHeroes();
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<Hero> Get(int id)
-        {
-           
-            return repo.Get(id);
-        }
-
-        // POST api/values
+        // POST api/heroes/upsert
+        [Route("upsert/")]
         [HttpPost]
-        public IActionResult Post([FromBody] Hero hero)
+        public ActionResult Post( Hero hero)
         {
             if(hero == null)
             {
@@ -46,16 +51,22 @@ namespace TestApplication.Controllers
             return Ok(hero);
         }
 
-        // PUT api/values/5
+        // PUT api/heroes/upsert/{id?}
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [Route("upsert/{id?}/")]
+        public void Update(Hero hero)
         {
+            repo.Update(hero);
         }
 
-        // DELETE api/values/5
+        // DELETE api/heroes/delete/{id?}
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        [Route("delete/{id?}/")]
+        public ActionResult<IEnumerable<Hero>> Delete(int id)
         {
+            repo.Delete(id);
+            return repo.GetHeroes();
+
         }
     }
 }

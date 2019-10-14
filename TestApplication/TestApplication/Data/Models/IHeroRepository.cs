@@ -43,14 +43,16 @@ namespace TestApplication.Data.Models
         public void Create(Hero hero)
         {
             using (IDbConnection db = new SqlConnection(connectionString))
-            {
-                var sqlQuery = "INSERT INTO Heroes (Id, Name) VALUES(@Id, @Name)";
+            { 
+                if (db.Query<int>("SELECT Id From Heroes").Count()==0)
+                {
+                    var sql = " DBCC CHECKIDENT ('[Heroes]', RESEED, 0)";
+                    db.Execute(sql);
+                }
+                var sqlQuery = "INSERT INTO Heroes (Name) VALUES(@Name)";
                 db.Execute(sqlQuery, hero);
 
-                // если мы хотим получить id добавленного пользователя
-                //var sqlQuery = "INSERT INTO Users (Name, Age) VALUES(@Name, @Age); SELECT CAST(SCOPE_IDENTITY() as int)";
-                //int? userId = db.Query<int>(sqlQuery, user).FirstOrDefault();
-                //user.Id = userId.Value;
+               
             }
         }
 
