@@ -29,8 +29,9 @@ namespace TestApplication
                         string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=HeroDB;Integrated Security=True;";
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+  //dependency injection
             services.AddTransient<IHeroRepository, HeroRepository>(provider => new HeroRepository(connectionString));
-
+//added cors because of http request problems
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllHeaders",

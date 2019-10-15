@@ -9,6 +9,9 @@ using TestApplication.Models;
 
 namespace TestApplication.Data.Models
 {
+    /// <summary>
+    /// repo for main functions 
+    /// </summary>
     public interface IHeroRepository
     {
         void Create(Hero hero);
@@ -24,6 +27,10 @@ namespace TestApplication.Data.Models
         {
             connectionString = conn;
         }
+        /// <summary>
+        /// return all records
+        /// </summary>
+        /// <returns></returns>
         public List<Hero> GetHeroes()
         {
             using (IDbConnection db = new SqlConnection(connectionString))
@@ -31,7 +38,11 @@ namespace TestApplication.Data.Models
                 return db.Query<Hero>("SELECT * FROM Heroes").ToList();
             }
         }
-
+        /// <summary>
+        /// return record by id 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Hero Get(int id)
         {
             using (IDbConnection db = new SqlConnection(connectionString))
@@ -39,7 +50,10 @@ namespace TestApplication.Data.Models
                 return db.Query<Hero>("SELECT * FROM Heroes WHERE Id = @id", new { id }).FirstOrDefault();
             }
         }
-
+        /// <summary>
+        /// add new record to db
+        /// </summary>
+        /// <param name="hero"></param>
         public void Create(Hero hero)
         {
             using (IDbConnection db = new SqlConnection(connectionString))
@@ -55,7 +69,10 @@ namespace TestApplication.Data.Models
                
             }
         }
-
+        /// <summary>
+        /// update existing record
+        /// </summary>
+        /// <param name="hero"></param>
         public void Update(Hero hero)
         {
             using (IDbConnection db = new SqlConnection(connectionString))
@@ -64,7 +81,10 @@ namespace TestApplication.Data.Models
                 db.Execute(sqlQuery, hero);
             }
         }
-
+        /// <summary>
+        /// delete the record
+        /// </summary>
+        /// <param name="id"></param>
         public void Delete(int id)
         {
             using (IDbConnection db = new SqlConnection(connectionString))

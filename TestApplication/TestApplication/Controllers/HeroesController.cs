@@ -8,7 +8,9 @@ using TestApplication.Data.Models;
 using TestApplication.Models;
 
 namespace TestApplication.Controllers
-{
+{/// <summary>
+/// main controller class
+/// </summary>
     [Route("api/[controller]/")]
     [ApiController]
     [EnableCors("AllowAllHeaders")]
@@ -41,7 +43,7 @@ namespace TestApplication.Controllers
         // POST api/heroes/upsert
         [Route("upsert/")]
         [HttpPost]
-        public ActionResult Post( Hero hero)
+        public ActionResult Create( Hero hero)
         {
             if(hero == null)
             {

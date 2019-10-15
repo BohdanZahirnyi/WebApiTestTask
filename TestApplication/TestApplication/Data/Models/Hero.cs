@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace TestApplication.Models
 {
+    /// <summary>
+    /// model class 
+    /// </summary>
     public class Hero
     {
         public int Id { get; set; }
